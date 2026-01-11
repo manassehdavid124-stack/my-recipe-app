@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function ResetPassword() {
+export default function ResetPasswordClient() {
   const params = useSearchParams();
   const token = params.get("token");
 
