@@ -22,5 +22,28 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
 }
+@keyframes fadeInEasy {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+ 
+#header{
+  background-image:url(https://assets.cms.carbmanager.com/cm-website/bdb7a4a4-0011-4597-a639-7b34692fb26b_hero%402x.jpg?auto=compress%2Cformat&w=1&auto=format&fit=max)
+}
+
+#Hero{
+  /* background: (135deg, hsl(var(--hero-gradient-from)), hsl(var(--hero-gradient-to))); */
+  background: linear-gradient(100deg, rgb(245, 147, 61), rgb(232, 94, 48));
+
+
+
+}
+/* @media {
+  :root{
+    --hero-gradient-from : rgb(245, 147, 61);
+    --hero-gradient-to : rgb(232, 94, 48);
+  };
+} */
+ 
