@@ -16,11 +16,19 @@ export async function POST(req) {
       );
     }
 
-    const db = await mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "Carsupdate7#",
-      database: "recipefinder_db",
+    // const db = await mysql.createConnection({
+    //   host: "localhost",
+    //   user: "root",
+    //   password: "Carsupdate7#",
+    //   database: "recipefinder_db",
+    // });
+
+    const db = mysql.createPool({
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      port: Number(process.env.DB_PORT),
     });
 
     const [rows] = await db.execute(
