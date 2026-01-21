@@ -1,12 +1,15 @@
 import React from 'react'
 import Body from './Body'
 import Home from './Home'
+import ProtectedRoute from '../ProtectedRoute'
 
 const page = () => {
   return (
     <div>
-      <Home/>
-      <Body/>
+      <ProtectedRoute>
+       <Home/>
+        <Body/>
+      </ProtectedRoute>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import SearchRecipe from './SearchRecipe'
 
@@ -12,6 +13,18 @@ const Home = () => {
         <a className="hover:opacity-80">Home</a>
         <a className="hover:opacity-80">About</a>
         <a className="hover:opacity-80">Request</a>
+
+        {/* Logout */}
+        <span
+          onClick={() => {
+            localStorage.removeItem("token"); // remove JWT
+            localStorage.removeItem("userEmail"); // optional
+            window.location.href = "/signin"; // redirect to signin page
+          }}
+          className="hover:opacity-80 text-red-500"
+        >
+          Log Out
+        </span>
       </div>
 
       {/* DECORATIVE EMOJIS (Desktop only) */}

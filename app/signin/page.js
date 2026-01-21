@@ -41,6 +41,9 @@ const Page = () => {
                 return;
             }
 
+            localStorage.setItem("token", data.token); // make sure "token" is exactly this key
+            localStorage.setItem("userEmail", data.email); // optional
+
             alert("Signin successful");
             // example redirect
             window.location.href = "/components/Home";
