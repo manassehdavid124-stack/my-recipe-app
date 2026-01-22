@@ -53,38 +53,61 @@
 //     );
 //   }
 // }
-import { db } from "@lib/db.js"; // alias
+
+import { NextResponse } from "next/server";
+import db from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { email, password } = body;
+    const { email, password } = await req.json();
 
+    // validation
     if (!email || !password) {
-      return new Response(JSON.stringify({ message: "Email and password are required" }), { status: 400 });
+      return NextResponse.json(
+        { message: "Email and password are required" },
+        { status: 400 }
+      );
     }
 
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("userEmail", data.email);
-    router.push("/components/Home"); // redirect to Home
+    if (password.length < 8) {
+      return NextResponse.json(
+        { message: "Password must be at least 8 characters" },
+        { status: 400 }
+      );
+    }
 
-    // Check if user exists
-    const [existing] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
+    // check if user exists
+    const [existing] = await db.query(
+      "SELECT id FROM users WHERE email = ?",
+      [email]
+    );
+
     if (existing.length > 0) {
-      return new Response(JSON.stringify({ message: "User already exists" }), { status: 400 });
+      return NextResponse.json(
+        { message: "User already exists" },
+        { status: 409 }
+      );
     }
 
-    // Hash password
+    // hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert new user
-    await db.query("INSERT INTO users (email, password) VALUES (?, ?)", [email, hashedPassword]);
+    // insert user
+    await db.query(
+      "INSERT INTO users (email, password) VALUES (?, ?)",
+      [email, hashedPassword]
+    );
 
-    return new Response(JSON.stringify({ message: "Signup successful" }), { status: 200 });
+    return NextResponse.json(
+      { message: "Signup successful" },
+      { status: 201 }
+    );
   } catch (err) {
-    console.error("DB error 👉", err);
-    return new Response(JSON.stringify({ message: "Database connection failed" }), { status: 500 });
+    console.error("SIGNUP ERROR 👉", err);
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
-

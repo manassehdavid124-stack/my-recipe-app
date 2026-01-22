@@ -1,6 +1,8 @@
 'use client'
 import React from 'react'
 import SearchRecipe from './SearchRecipe'
+import { signOut } from "next-auth/react";
+
 
 const Home = () => {
   return (
@@ -10,18 +12,10 @@ const Home = () => {
     >
       {/* NAVBAR (Desktop only) */}
       <div className="hidden lg:flex absolute top-8 right-24 gap-10 text-2xl font-bold cursor-pointer">
-        <a className="hover:opacity-80">Home</a>
-        <a className="hover:opacity-80">About</a>
-        <a className="hover:opacity-80">Request</a>
-
-        {/* Logout */}
+        
         <span
-          onClick={() => {
-            localStorage.removeItem("token"); // remove JWT
-            localStorage.removeItem("userEmail"); // optional
-            window.location.href = "/signin"; // redirect to signin page
-          }}
-          className="hover:opacity-80 text-red-500"
+          onClick={() => signOut({ callbackUrl: "/signin" })} // redirects after logout
+          className="hover:opacity-80 text-red-500 cursor-pointer"
         >
           Log Out
         </span>

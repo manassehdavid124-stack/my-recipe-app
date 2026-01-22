@@ -55,13 +55,13 @@ const Landingpage = () => {
   
       <div className="hidden lg:flex lg:ml-290 gap-6 mb-7 text-xl">
         <Link
-          href="/Signin"
+          href="/signin"
           className="px-5 py-3 rounded-xl hover:bg-white/20 transition"
         >
           Login
         </Link>
         <Link
-          href="/Signup"
+          href="/signup"
           className="px-5 py-3 rounded-xl bg-amber-50 text-amber-400 hover:bg-amber-100 transition"
         >
           Sign Up

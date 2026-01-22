@@ -1,21 +1,25 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+
+import { useSession, signIn } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function ProtectedRoute({ children }) {
-  const router = useRouter();
-  const [isChecking, setIsChecking] = useState(true);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      router.replace("/signin"); // redirect if not logged in
-    } else {
-      setIsChecking(false); // token exists → allow rendering
+    if (status === "unauthenticated") {
+      signIn(); // redirects to /api/auth/signin
     }
-  }, [router]);
+  }, [status]);
 
-  if (isChecking) return <p className="text-white p-10">Checking authentication...</p>;
+  // while loading session
+  if (status === "loading") {
+    return <p className="text-white p-10">Checking authentication...</p>;
+  }
+
+  // unauthenticated users are redirected, authenticated users see content
+  if (!session) return null;
 
   return <>{children}</>;
+  
 }

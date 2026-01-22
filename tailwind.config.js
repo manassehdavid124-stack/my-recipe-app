@@ -1,6 +1,10 @@
-// tailwind.config.js
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx,html}"], // <- make sure this matches your project
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx}",       // your app folder
+    "./components/**/*.{js,ts,jsx,tsx}", // components
+    "./src/**/*.{js,ts,jsx,tsx,html}",   // if you still use src folder
+    "./pages/**/*.{js,ts,jsx,tsx}",      // optional if you have pages folder
+  ],
   theme: {
     extend: {
       keyframes: {

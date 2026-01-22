@@ -18,7 +18,7 @@ const page = () => {
 
 
     // </div>
-    <div>
+    <div className="w-full max-w-[99%] mx-auto">
       <Landingpage />
       <GetRecipe />
       <Body />

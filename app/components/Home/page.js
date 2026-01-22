@@ -5,7 +5,8 @@ import ProtectedRoute from '../ProtectedRoute'
 
 const page = () => {
   return (
-    <div>
+    <div className='overflow-hidden'>
+      
       <ProtectedRoute>
        <Home/>
         <Body/>
