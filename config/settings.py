@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "my-recipe-app.onrender.com",
+    "https://my-recipe-app-vsrl.onrender.com",
 ]
 
 
