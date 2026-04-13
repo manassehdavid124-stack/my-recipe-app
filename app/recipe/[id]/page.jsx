@@ -40,7 +40,7 @@ export default function RecipePage() {
 
       <img
         src={meal.strMealThumb}
-        className="w-[400px] rounded-xl mt-4"
+        className="w-100 rounded-xl mt-4"
       />
       <div className="absolute top-1/6 text-6xl opacity-10">🍳</div>
       <div className="absolute top-2/4 right-4 text-6xl opacity-30">🥗</div>
