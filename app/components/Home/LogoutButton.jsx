@@ -1,5 +1,7 @@
-import { signOut } from "next-auth/react";
-
-<button onClick={() => signOut({ callbackUrl: "/signin" })}>
+const handleLogout = () => {
+  localStorage.removeItem("token"); // remove token
+  window.location.href = "/login";  // redirect to login
+};
+<button onClick={handleLogout}>
   Log out
 </button>

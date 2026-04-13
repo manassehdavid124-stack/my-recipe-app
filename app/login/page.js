@@ -45,18 +45,17 @@ const Page = () => {
       // ✅ Save token
       localStorage.setItem("token", data.access);
 
-    
-      // successful login
-      window.location.href = "/components/Home";
+      // ✅ Redirect to homepage
+      window.location.href = "/";
     } catch (err) {
-      setError("Something went wrong");
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div id="Hero" className="flex flex-col items-center justify-center min-h-screen pt-20">
+    <div className="flex flex-col items-center justify-center min-h-screen pt-20">
       <h1 className="text-4xl font-bold mb-2 text-black">Welcome Back!</h1>
       <p className="text-gray-600 mb-8">
         Please sign in to continue to My Recipe App

@@ -1,8 +1,13 @@
+
 "use client";
+
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,17 +26,18 @@ const Page = () => {
       return;
     }
 
-    setError("");
     setLoading(true);
+    setError("");
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/login/", {
+      const res = await fetch("http://127.0.0.1:8000/api/signup/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: email,
+          email: email,
           password: password,
         }),
       });
@@ -39,30 +45,29 @@ const Page = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Invalid login credentials");
+        throw new Error(data.error || "Something went wrong");
       }
 
-      // ✅ Save token
-      localStorage.setItem("token", data.access);
+      console.log(data);
 
-    
-      // successful login
-      window.location.href = "/components/Home";
+      // ✅ redirect to login page
+      router.push("/login");
+
     } catch (err) {
-      setError("Something went wrong");
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div id="Hero" className="flex flex-col items-center justify-center min-h-screen pt-20">
-      <h1 className="text-4xl font-bold mb-2 text-black">Welcome Back!</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen pt-20">
+      <h1 className="text-4xl font-bold mb-2 text-black">Create Account</h1>
       <p className="text-gray-600 mb-8">
-        Please sign in to continue to My Recipe App
+        Sign up to start using My Recipe App
       </p>
 
-      {/* Floating emojis */}
+      {/* emojis */}
       <div className="absolute top-1/6 text-6xl opacity-10">🍳</div>
       <div className="absolute top-2/4 right-4 text-6xl opacity-30">🥗</div>
       <div className="absolute top-1/2 left-8 text-4xl opacity-30">🍅</div>
@@ -71,7 +76,7 @@ const Page = () => {
       <form onSubmit={handleSubmit}>
         <div className="lg:bg-white p-8 rounded-2xl shadow-lg w-96 relative z-10">
           <h2 className="text-2xl font-bold mb-6 text-center text-black">
-            Sign In
+            Sign Up
           </h2>
 
           {error && (
@@ -83,7 +88,7 @@ const Page = () => {
             <label className="block text-black mb-1">Email</label>
             <input
               type="email"
-              className="w-full px-3 py-2 border text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border text-black rounded-lg"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
@@ -95,7 +100,7 @@ const Page = () => {
             <label className="block text-black mb-1">Password</label>
             <input
               type="password"
-              className="w-full px-3 py-2 border text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border text-black rounded-lg"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
@@ -108,22 +113,14 @@ const Page = () => {
             disabled={loading}
             className="w-full bg-black text-white py-2 rounded-lg hover:bg-blue-600 transition disabled:opacity-50"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? "Creating account..." : "Sign Up"}
           </button>
 
-          {/* Links */}
           <Link
-            href="/register"
-            className="block mt-3 text-center text-blue-500 hover:underline"
+            href="/login"
+            className="block mt-3 text-center text-blue-500"
           >
-            Create Account
-          </Link>
-
-          <Link
-            href="/reset-password"
-            className="block mt-2 text-center text-blue-500 hover:underline"
-          >
-            Forgot Password?
+            Already have an account? Sign in
           </Link>
         </div>
       </form>
