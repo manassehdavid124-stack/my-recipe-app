@@ -30,7 +30,7 @@ const Page = () => {
     setError("");
 
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/signup/", {
+      const res = await fetch("https://my-recipe-app-vsrl.onrender.com/api/signup/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen pt-20">
+    <div id="Hero" className="flex flex-col items-center justify-center min-h-screen pt-20">
       <h1 className="text-4xl font-bold mb-2 text-black">Create Account</h1>
       <p className="text-gray-600 mb-8">
         Sign up to start using My Recipe App
