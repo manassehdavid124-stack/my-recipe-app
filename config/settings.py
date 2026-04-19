@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-!l09m6m!h1_a+h9ufuj)rsf%%%lsi96^07g#%&b8b+g#0(zf($
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "my-recipe-app.onrender.com",
-    "https://my-recipe-app-vsrl.onrender.com",
+   "*"
 ]
 
 
