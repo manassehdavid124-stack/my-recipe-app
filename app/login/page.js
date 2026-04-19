@@ -25,7 +25,7 @@ const Page = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("https://my-recipe-app-vsrl.onrender.com/api/login/", {
+      const res = await fetch( `${process.env.NEXT_PUBLIC_API_URL}/api/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
